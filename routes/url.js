@@ -1,5 +1,5 @@
 const express = require('express');
-const { generateShortURL, handleGetAnalytics } = require("../controller/url")
+const { generateShortURL, handleGetAnalytics } = require("../controllers/url")
 
 
 const router = express.Router();

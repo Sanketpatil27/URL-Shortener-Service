@@ -1,6 +1,8 @@
 const express = require('express');
+const path = require('path');
 const urlRoute = require("./routes/url");
 const { connectToMongoDB  } = require('./connect');
+const staticRoute = require('./routes/staticRouters');
 const URL = require('./models/url');
 const app = express();
 
@@ -9,12 +11,17 @@ connectToMongoDB('mongodb+srv://admin:KUOMZ3v7gfyPGlVA@cluster0.dikomqc.mongodb.
     console.log('MongoDB connected')
 );
 
+app.set('view engine', 'ejs');
+app.set('views', path.resolve('./views'));
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));        // to handle the form data, false means both json and form data is supported
 
 app.use("/url", urlRoute);
+app.use('/', staticRoute);
 
 // get redirect URL
-app.get('/:shortID', async(req, res) => {
+app.get('/url/:shortID', async(req, res) => {
     shortID = req.params.shortID;
     console.log(shortID);
 

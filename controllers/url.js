@@ -14,7 +14,13 @@ async function generateShortURL(req, res) {
         visitHistory: [],
     });
 
-    return res.json({ id: shortID });
+    // return res.json({ id: shortID });
+    
+    // after creating UI we render homepage again and also send id
+    return res.render('home', {
+        id: shortID
+    });
+
 } 
 
 async function handleGetAnalytics(req, res) {

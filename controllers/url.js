@@ -27,12 +27,11 @@ async function handleGetAnalytics(req, res) {
     const shortId = req.params.shortID;
     
     const result = await URL.findOne({ shortId });
-
     if(!result) {
-        res.json({ msg: "short URL doesn't exist for this ID!"});
+        return res.json({ msg: "short URL doesn't exist for this ID!"});
     }
 
-    res.json({ noOfClicks: result.visitHistory.length, analytics: result.visitHistory });
+    return res.json({ noOfClicks: result.visitHistory.length, analytics: result.visitHistory });
 }
 
 module.exports = {
